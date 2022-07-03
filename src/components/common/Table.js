@@ -27,7 +27,7 @@ export const TableComponent = ({ columns, data }) => {
           <TableRow>
             {columns &&
               columns.map((column) => (
-                <TableCell align="left">{column.title}</TableCell>
+                <TableCell align="left" sx={{fontWeight: '600'}}>{column.title}</TableCell>
               ))}
  
           </TableRow>
