@@ -1,17 +1,15 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { Home } from "./components/Home/Home";
-import { Summary } from "./components/Home/Summary";
+import { Box, Typography } from "@mui/material";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to React Router!</h1>
+    <Box className="App">
+      <Typography component={"h1"}>Employee Manager </Typography>
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
-    </div>
+    </Box>
   );
 }
 

@@ -1,10 +1,11 @@
-import React from 'react';
-import { Summary } from './Summary';
+import { Box } from "@mui/material";
+import React from "react";
+import { Summary } from "./Summary";
 
 export const Home = () => {
-
-return <div>
-    Home
-    <Summary/>
-</div>
-}
+  return (
+    <Box>
+      <Summary />
+    </Box>
+  );
+};
