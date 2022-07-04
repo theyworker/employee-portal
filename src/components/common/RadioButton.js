@@ -5,9 +5,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-export const RowRadioButtonsComponent = ({label,  onChange}) => {
+export const RowRadioButtonsComponent = ({label,  onChange, error}) => {
   return (
-    <FormControl sx={{ margin: "1em"}}>
+    <FormControl sx={{ margin: "1em", width: '100%'}} error={error} >
       <FormLabel id="demo-row-radio-buttons-group-label">{label}</FormLabel>
       <RadioGroup
         row

@@ -2,7 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const employeeFormSlice = createSlice({
   name: "employeeForm",
-  initialState: {},
+  initialState: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    gender: "",
+  },
   reducers: {
     setFirstName: (state, action) => {
       state.firstName = action.payload;
