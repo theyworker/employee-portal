@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RowRadioButtonsComponent } from "../common/RadioButton";
 import { TextFieldComponent } from "../common/TextField";
 import {
@@ -9,11 +10,13 @@ import {
   setEmail,
   setPhone,
   setGender,
+  clearForm
 } from "../../redux/employees/employeeFormSlice";
 import { ButtonComponent } from "../common/Button";
 import axios, { Axios } from "axios";
 
 export const EmployeeForm = ({ mode = "add", id }) => {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const { firstName, lastName, email, phone, gender } = useSelector(
     (state) => (state && state.form) || {}
@@ -25,6 +28,13 @@ export const EmployeeForm = ({ mode = "add", id }) => {
     phone: false,
     gender: false,
   });
+
+  useEffect(
+    ()=> {
+      return () =>dispatch(clearForm())
+    },
+    []
+  )
 
   const isNameValid = (name) => name && name.length > 5 && name.length < 11;
   const isEmailValid = (email) =>
@@ -66,6 +76,8 @@ export const EmployeeForm = ({ mode = "add", id }) => {
           .then((res) => {
             if (res.status == 200) {
               console.log("sucess");
+              dispatch(clearForm())
+              navigate(`../`)
             }
           });
       } else {
@@ -80,6 +92,8 @@ export const EmployeeForm = ({ mode = "add", id }) => {
           .then((res) => {
             if (res.status == 201) {
               console.log("sucess");
+              dispatch(clearForm())
+              navigate(`../`)
             }
           });
       }

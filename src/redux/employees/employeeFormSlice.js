@@ -34,7 +34,11 @@ export const employeeFormSlice = createSlice({
       state.gender = action.payload;
     },
     clearForm: (state) => {
-      state = {};
+      state.firstName = "";
+      state.lastName = "";
+      state.email = "";
+      state.phone = "";
+      state.gender = "";
     },
   },
 });
@@ -47,6 +51,7 @@ export const {
   setEmail,
   setPhone,
   setGender,
+  clearForm
 } = employeeFormSlice.actions;
 
 export default employeeFormSlice.reducer;
