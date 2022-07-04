@@ -1,4 +1,4 @@
-import {  Box } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ import { ButtonComponent } from "../common/Button";
 import axios, { Axios } from "axios";
 import { useEmployees } from "../../customHooks/useEmployees";
 import { AlertComponent } from "../common/Alert";
+import { BaseURL } from "../../const/API";
 
 export const EmployeeForm = ({ mode = "add", id }) => {
   let navigate = useNavigate();
@@ -30,7 +31,7 @@ export const EmployeeForm = ({ mode = "add", id }) => {
     phone: false,
     gender: false,
   });
-  const [openPopup, setOpenPopup] = useState(false)
+  const [openPopup, setOpenPopup] = useState(false);
   const { employeeData } = useEmployees();
   useEffect(() => {
     return () => dispatch(clearForm());
@@ -64,16 +65,13 @@ export const EmployeeForm = ({ mode = "add", id }) => {
     if (!checkErrors()) {
       if (mode == "edit") {
         axios
-          .put(
-            `https://62c1466c2af60be89ec41056.mockapi.io/v1/employee/${id}`,
-            {
-              firstName,
-              lastName,
-              email,
-              phone,
-              gender,
-            }
-          )
+          .put(`${BaseURL}${id}`, {
+            firstName,
+            lastName,
+            email,
+            phone,
+            gender,
+          })
           .then((res) => {
             if (res.status == 200) {
               console.log("sucess");
@@ -83,7 +81,7 @@ export const EmployeeForm = ({ mode = "add", id }) => {
           });
       } else {
         axios
-          .post("https://62c1466c2af60be89ec41056.mockapi.io/v1/employee", {
+          .post(BaseURL, {
             firstName,
             lastName,
             email,
@@ -113,11 +111,11 @@ export const EmployeeForm = ({ mode = "add", id }) => {
         employeeFromData.email == email &&
         employeeFromData.phone == phone &&
         employeeFromData.gender == gender
-      )
-       { navigate(`../`);}
-       else{
-        setOpenPopup(true)
-       }
+      ) {
+        navigate(`../`);
+      } else {
+        setOpenPopup(true);
+      }
     }
   };
 
@@ -161,7 +159,11 @@ export const EmployeeForm = ({ mode = "add", id }) => {
           sx={{ marginLeft: "2em" }}
         />
       </Box>
-      <AlertComponent open={openPopup} handleLeave={()=>navigate(`../`)} handleClose={()=>setOpenPopup(false)}/>
+      <AlertComponent
+        open={openPopup}
+        handleLeave={() => navigate(`../`)}
+        handleClose={() => setOpenPopup(false)}
+      />
     </Box>
   );
 };

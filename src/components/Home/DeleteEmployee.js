@@ -4,6 +4,7 @@ import { ButtonComponent } from "../common/Button";
 import { useParams } from "react-router-dom";
 import { useEmployees } from "../../customHooks/useEmployees";
 import axios from "axios";
+import { BaseURL } from "../../const/API";
 
 export const DeleteEmployee = () => {
   let { id } = useParams();
@@ -13,7 +14,7 @@ export const DeleteEmployee = () => {
   const [delEmpData] = employeeData.filter((emp) => emp.id == id);
   const handleDelete = async () => {
     axios
-      .delete(`https://62c1466c2af60be89ec41056.mockapi.io/v1/employee/${id}`)
+      .delete(`${BaseURL}${id}`)
       .then((res) => {
         if (res.status == 200) {
           console.log("sucess");
