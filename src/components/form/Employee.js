@@ -105,6 +105,7 @@ export const EmployeeForm = ({ mode = "add", id }) => {
     } else {
       const [employeeFromData] = employeeData.filter((emp) => emp.id == id);
       if (
+        //match with original object to see for unsaved data
         employeeFromData.firstName == firstName &&
         employeeFromData.lastName == lastName &&
         employeeFromData.email == email &&
