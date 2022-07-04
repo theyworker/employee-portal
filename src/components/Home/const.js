@@ -5,7 +5,7 @@ export const SummaryColumns = [
   },
   {
     title: "Last Name",
-    mappingField: "secondName",
+    mappingField: "lastName",
   },
   {
     title: "Email",

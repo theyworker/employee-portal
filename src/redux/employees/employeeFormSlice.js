@@ -10,6 +10,14 @@ export const employeeFormSlice = createSlice({
     gender: "",
   },
   reducers: {
+    setAllFormData: (state, action) => {
+      let { firstName, lastName, email, phone, gender } = action.payload; // state = action.payload;
+      state.firstName = firstName;
+      state.lastName = lastName;
+      state.email = email;
+      state.phone = phone;
+      state.gender = gender;
+    },
     setFirstName: (state, action) => {
       state.firstName = action.payload;
     },
@@ -32,7 +40,13 @@ export const employeeFormSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setFirstName, setLastName, setEmail, setPhone, setGender } =
-  employeeFormSlice.actions;
+export const {
+  setAllFormData,
+  setFirstName,
+  setLastName,
+  setEmail,
+  setPhone,
+  setGender,
+} = employeeFormSlice.actions;
 
 export default employeeFormSlice.reducer;

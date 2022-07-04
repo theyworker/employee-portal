@@ -19,10 +19,7 @@ export const useEmployees = () => {
     );
 
     useEffect(() => {
-      console.log("running", employeeData);
-      console.log("employeeData.length", employeeData.length);
       if (employeeData && employeeData.length == 0) {
-        console.log("fetching");
         fetchEmployeeData();
       }
     }, [employeeData]);

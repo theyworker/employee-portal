@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -44,6 +45,8 @@ export const TableComponent = ({ columns, data }) => {
                 columns.map((column) => (
                   <TableCell align="left">{row[column.mappingField]}</TableCell>
                 ))}
+                <TableCell align="left"> <Button>Edit</Button> </TableCell>
+                <TableCell align="left"> <Button>Delete</Button> </TableCell>
             </TableRow>
           ))}
         </TableBody>

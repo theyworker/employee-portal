@@ -13,9 +13,9 @@ import {
 import { ButtonComponent } from "../common/Button";
 import axios, { Axios } from "axios";
 
-export const EmployeeForm = ({}) => {
+export const EmployeeForm = ({ mode = "add" }) => {
   const dispatch = useDispatch();
-  const { firstName, lastName, email, phone, gender } = useSelector(
+  const { id, firstName, lastName, email, phone, gender } = useSelector(
     (state) => (state && state.form) || {}
   );
   const [error, setError] = useState({
@@ -51,19 +51,38 @@ export const EmployeeForm = ({}) => {
 
     setError(errorObj);
     if (!checkErrors()) {
-      axios
-        .post("https://62c1466c2af60be89ec41056.mockapi.io/v1/employee", {
-          firstName,
-          lastName,
-          email,
-          phone,
-          gender,
-        })
-        .then((res) => {
-          if (res.status == 201) {
-            console.log("sucess");
-          }
-        });
+      if (mode == "edit") {
+        axios
+          .put(
+            `https://62c1466c2af60be89ec41056.mockapi.io/v1/employee/${id}`,
+            {
+              firstName,
+              lastName,
+              email,
+              phone,
+              gender,
+            }
+          )
+          .then((res) => {
+            if (res.status == 200) {
+              console.log("sucess");
+            }
+          });
+      } else {
+        axios
+          .post("https://62c1466c2af60be89ec41056.mockapi.io/v1/employee", {
+            firstName,
+            lastName,
+            email,
+            phone,
+            gender,
+          })
+          .then((res) => {
+            if (res.status == 201) {
+              console.log("sucess");
+            }
+          });
+      }
     }
   };
 

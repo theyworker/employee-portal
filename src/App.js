@@ -1,7 +1,8 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { Container, Typography } from "@mui/material";
-import { EmployeeForm } from "./components/form/Employee";
+import {AddEmployee} from './components/Home/AddEmployee'
+import {EditEmployee} from './components/Home/EditEmployee'
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       </Typography>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/add" element={<EmployeeForm />} />
+        <Route path="/add" element={<AddEmployee/>} />
+        <Route path="/edit/:id" element={<EditEmployee />} />
       </Routes>
     </Container>
   );
