@@ -13,9 +13,9 @@ import {
 import { ButtonComponent } from "../common/Button";
 import axios, { Axios } from "axios";
 
-export const EmployeeForm = ({ mode = "add" }) => {
+export const EmployeeForm = ({ mode = "add", id }) => {
   const dispatch = useDispatch();
-  const { id, firstName, lastName, email, phone, gender } = useSelector(
+  const { firstName, lastName, email, phone, gender } = useSelector(
     (state) => (state && state.form) || {}
   );
   const [error, setError] = useState({

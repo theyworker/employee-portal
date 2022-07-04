@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -21,6 +22,7 @@ const rows = [
 ];
 
 export const TableComponent = ({ columns, data }) => {
+  let navigate = useNavigate();
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -45,7 +47,7 @@ export const TableComponent = ({ columns, data }) => {
                 columns.map((column) => (
                   <TableCell align="left">{row[column.mappingField]}</TableCell>
                 ))}
-                <TableCell align="left"> <Button>Edit</Button> </TableCell>
+                <TableCell align="left"> <Button onClick={()=>  navigate(`../edit/${row.id}`)}>Edit</Button> </TableCell>
                 <TableCell align="left"> <Button>Delete</Button> </TableCell>
             </TableRow>
           ))}

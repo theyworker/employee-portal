@@ -5,7 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-export const RowRadioButtonsComponent = ({label,  onChange, error}) => {
+export const RowRadioButtonsComponent = ({label,  onChange, error ,value}) => {
   return (
     <FormControl sx={{ margin: "1em", width: '100%'}} error={error} >
       <FormLabel id="demo-row-radio-buttons-group-label">{label}</FormLabel>
@@ -14,6 +14,7 @@ export const RowRadioButtonsComponent = ({label,  onChange, error}) => {
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
         onChange={onChange}
+        value={value}
       >
         <FormControlLabel value="female" control={<Radio />} label="Female" />
         <FormControlLabel value="male" control={<Radio />} label="Male" />

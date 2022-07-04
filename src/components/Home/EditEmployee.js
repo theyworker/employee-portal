@@ -13,7 +13,6 @@ export const EditEmployee = () => {
   useEffect(() => {
 
     const [employeeFromData] = employeeData.filter((emp) => emp.id == id) ;
-    console.log(employeeFromData);
     if (employeeFromData) {
       dispatch(setAllFormData(employeeFromData));
     }
