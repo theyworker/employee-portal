@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import {  Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ import {
 import { ButtonComponent } from "../common/Button";
 import axios, { Axios } from "axios";
 import { useEmployees } from "../../customHooks/useEmployees";
+import { AlertComponent } from "../common/Alert";
 
 export const EmployeeForm = ({ mode = "add", id }) => {
   let navigate = useNavigate();
@@ -29,6 +30,7 @@ export const EmployeeForm = ({ mode = "add", id }) => {
     phone: false,
     gender: false,
   });
+  const [openPopup, setOpenPopup] = useState(false)
   const { employeeData } = useEmployees();
   useEffect(() => {
     return () => dispatch(clearForm());
@@ -114,7 +116,7 @@ export const EmployeeForm = ({ mode = "add", id }) => {
       )
        { navigate(`../`);}
        else{
-         alert('You hae changes  ')
+        setOpenPopup(true)
        }
     }
   };
@@ -159,6 +161,7 @@ export const EmployeeForm = ({ mode = "add", id }) => {
           sx={{ marginLeft: "2em" }}
         />
       </Box>
+      <AlertComponent open={openPopup} handleLeave={()=>navigate(`../`)} handleClose={()=>setOpenPopup(false)}/>
     </Box>
   );
 };
