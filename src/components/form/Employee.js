@@ -23,7 +23,7 @@ export const EmployeeForm = ({}) => {
     lastName: false,
     email: false,
     phone: false,
-    gender: null,
+    gender: false,
   });
 
   const isNameValid = (name) => name && name.length > 5 && name.length < 11;
@@ -44,13 +44,13 @@ export const EmployeeForm = ({}) => {
     errorObj.lastName = !isNameValid(lastName);
     errorObj.email = !isEmailValid(email);
     errorObj.phone = !isPhone(phone);
-    errorObj.gender = !gender;
+    errorObj.gender = gender ? false : true;
 
-    if (errorObj) {
-      setError(errorObj);
-    } else {
-      //Post on Validation
+    const checkErrors = () =>
+      Object.values(errorObj).some((value) => value == true);
 
+    setError(errorObj);
+    if (!checkErrors()) {
       axios
         .post("https://62c1466c2af60be89ec41056.mockapi.io/v1/employee", {
           firstName,
