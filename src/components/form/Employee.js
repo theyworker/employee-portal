@@ -10,10 +10,11 @@ import {
   setEmail,
   setPhone,
   setGender,
-  clearForm
+  clearForm,
 } from "../../redux/employees/employeeFormSlice";
 import { ButtonComponent } from "../common/Button";
 import axios, { Axios } from "axios";
+import { useEmployees } from "../../customHooks/useEmployees";
 
 export const EmployeeForm = ({ mode = "add", id }) => {
   let navigate = useNavigate();
@@ -28,13 +29,11 @@ export const EmployeeForm = ({ mode = "add", id }) => {
     phone: false,
     gender: false,
   });
-
-  useEffect(
-    ()=> {
-      return () =>dispatch(clearForm())
-    },
-    []
-  )
+  const { employeeData } = useEmployees();
+  useEffect(() => {
+    return () => dispatch(clearForm());
+    //clearing form on unmount
+  }, []);
 
   const isNameValid = (name) => name && name.length > 5 && name.length < 11;
   const isEmailValid = (email) =>
@@ -76,8 +75,8 @@ export const EmployeeForm = ({ mode = "add", id }) => {
           .then((res) => {
             if (res.status == 200) {
               console.log("sucess");
-              dispatch(clearForm())
-              navigate(`../`)
+
+              navigate(`../`);
             }
           });
       } else {
@@ -92,11 +91,30 @@ export const EmployeeForm = ({ mode = "add", id }) => {
           .then((res) => {
             if (res.status == 201) {
               console.log("sucess");
-              dispatch(clearForm())
-              navigate(`../`)
+              dispatch(clearForm());
+              navigate(`../`);
             }
           });
       }
+    }
+  };
+
+  const handleBack = () => {
+    if (mode == "add") {
+      navigate(`../`);
+    } else {
+      const [employeeFromData] = employeeData.filter((emp) => emp.id == id);
+      if (
+        employeeFromData.firstName == firstName &&
+        employeeFromData.lastName == lastName &&
+        employeeFromData.email == email &&
+        employeeFromData.phone == phone &&
+        employeeFromData.gender == gender
+      )
+       { navigate(`../`);}
+       else{
+         alert('You hae changes  ')
+       }
     }
   };
 
@@ -133,7 +151,12 @@ export const EmployeeForm = ({ mode = "add", id }) => {
         onChange={(event, val) => handleGender(event.target.value)}
       />
       <Box sx={{ textAlign: "right" }}>
-        <ButtonComponent label="Submit" onClick={handleSubmit} />
+        <ButtonComponent label="Back" onClick={handleBack} />
+        <ButtonComponent
+          label="Submit"
+          onClick={handleSubmit}
+          sx={{ marginLeft: "2em" }}
+        />
       </Box>
     </Box>
   );
